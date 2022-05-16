@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snakes and Ladders</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./snakesandladders.js" defer></script>
+</head>
+<body>
+    <div id="mainContent">
+        <div id="playerTurn"></div>
+    <div class="main--center">
+        <div class="main--grid" id="mainGrid">
+        </div>
+    </div>
+    <div id="printQuestion"></div>
+<div class="center">
+    <input type="text" id="mathInput">
+    <button onclick="snakesandladders.testMath(snakesandladders.currentPlayer);">Submit</button>
+    
+</div>
+</div>
+<div id="settings">
+    <div>
+        <div id="settingTitle">Select the amount of players</div>
+    <div id="settingOption">
+        <input type="range" id="playerCountInput" name="playerCountInput"
+         min="2" max="4">
+  <label for="playerCountInput">Player Count 2-4</label>
+    </div>
+    <div class="center"><button id="nextSetting" onclick="snakesandladders.settings();">Next ></button></div>
+</div>
+    
+    
+</div>
+</body>
+</html>

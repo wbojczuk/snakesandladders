@@ -1,0 +1,101 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.main--center{
+    padding-top:20px;
+    height:auto;
+    width:100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main--grid{
+    display: grid;
+    width:50vw;
+    aspect-ratio: 1/1;
+    border: 1px solid black;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+}
+
+.grid--item{
+    border: 1px solid black;
+    user-select: none;
+    position: relative;
+}
+.grid--num{
+    text-align: right;
+    font-size: 1.6vw;
+}
+
+.character{
+    top:0;
+    width:100%;
+    height: 100%;
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    position: absolute;
+    
+}
+
+#mainContent {
+    display: block;
+}
+
+#printQuestion{
+    width:100%;
+    height:70px;
+    text-align: center;
+    font-size:50px;
+    user-select: none;
+}
+
+button{
+    cursor: pointer;
+    user-select: none;
+}
+
+#playerTurn{
+    height:50px;
+    width:100%;
+    text-align: center;
+    font-size: 40px;
+    user-select: none;
+}
+
+#settings{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height:100vh;
+}
+
+#settingsFields{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#settingTitle{
+    padding-bottom: 100px;
+    text-align: center;
+    font-size: 40px;
+}
+#settingOption{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#nextSetting{
+    margin-top: 50px;
+}

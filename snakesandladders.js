@@ -24,6 +24,10 @@ let snakesandladders = {
         char2: {
             id:"char2",
             src: "./img/char2.svg"
+        },
+        char3: {
+            id:"char3",
+            src: "./img/char3.png"
         }
     },
 
@@ -63,7 +67,7 @@ settings: (charID)=>{
         snakesandladders.settingType = "playerChar";
         document.getElementById("nextSetting").style.display = "none";
     document.getElementById("settingTitle").textContent = `Set ${snakesandladders.players[snakesandladders.currentPlayer].name}'s Character`;
-    document.getElementById("settingOption").innerHTML = `<div onclick="snakesandladders.settings('char1');" class="character-disp" style="background-image:url('./img/char1.svg')"></div><div onclick="snakesandladders.settings('char2');" class="character-disp" style="background-image:url('./img/char2.svg')"></div>`;
+    document.getElementById("settingOption").innerHTML = `<div onclick="snakesandladders.settings('char3');" class="character-disp" style="background-image:url('./img/char3.png')"></div><div onclick="snakesandladders.settings('char1');" class="character-disp" style="background-image:url('./img/char1.svg')"></div><div onclick="snakesandladders.settings('char2');" class="character-disp" style="background-image:url('./img/char2.svg')"></div>`;
     }
     
 
@@ -195,28 +199,99 @@ snakesandladders.calcMath();
 },
 
 movePlayer: (player)=>{
-     let amount = Math.round(Math.random() * (6 - 1) + 1);
+     let amount = Math.round(Math.random() * (6-1) + 1);
+     
     let moveCounter = 0;
     moveLoop();
     function moveLoop(){
         const playerChar = document.getElementById(snakesandladders.players[player].id);
         playerChar.style.transform = `translateX(0%)`;
 
-        if (moveCounter < amount){
+        
+            if (moveCounter < amount){
             setTimeout(()=>{
-                moveCounter++
+                
+                if(snakesandladders.players[player].pos+moveCounter>100){
+                    snakesandladders.players[player].pos = 82;
+                const playerChar = document.getElementById(snakesandladders.players[player].id);
+                document.querySelector(`.col82`).append(playerChar);
+                }else{
+                    moveCounter++
                 const playerChar = document.getElementById(snakesandladders.players[player].id);
                 document.querySelector(`.col${snakesandladders.players[player].pos + moveCounter}`).append(playerChar);
                 playerChar.style.transform = `translateX(-100%)`;
+                
                 moveLoop();
-            }, 200);
+            }}, 200);
     
         } else {
             snakesandladders.players[player].pos += amount;
+            // TEST LADDERS AND STUFF HERE
+            setTimeout(()=>{
+                snakesandladders.testLadders(player);
+                snakesandladders.testSnakes(player);
+                snakesandladders.testWin(player);
+            }, 200);
         }
         
     } 
 },
+testLadders: (player)=>{
+    if(snakesandladders.players[player].pos == 6){
+        snakesandladders.players[player].pos = 15;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col15`).append(playerChar);
+    }else if(snakesandladders.players[player].pos == 26){
+        snakesandladders.players[player].pos = 74;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col74`).append(playerChar);
+    }else if(snakesandladders.players[player].pos == 50){
+        snakesandladders.players[player].pos = 69;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col69`).append(playerChar);
+    }else if(snakesandladders.players[player].pos == 59){
+        snakesandladders.players[player].pos = 79;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col79`).append(playerChar);
+    }else if(snakesandladders.players[player].pos == 81){
+        snakesandladders.players[player].pos = 100;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col100`).append(playerChar);
+    }
+},
+
+testSnakes: (player)=>{
+    if(snakesandladders.players[player].pos == 96){
+        snakesandladders.players[player].pos = 75;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col75`).append(playerChar);
+    } else if(snakesandladders.players[player].pos == 92){
+        snakesandladders.players[player].pos = 88;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col88`).append(playerChar);
+    }
+    else if(snakesandladders.players[player].pos == 72){
+        snakesandladders.players[player].pos = 4;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col4`).append(playerChar);
+    }else if(snakesandladders.players[player].pos == 58){
+        snakesandladders.players[player].pos = 40;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col40`).append(playerChar);
+    }else if(snakesandladders.players[player].pos == 14){
+        snakesandladders.players[player].pos = 8;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col8`).append(playerChar);
+    }
+},
+
+testWin: (player)=>{
+    if(snakesandladders.players[player].pos == 100){
+        alert(`${snakesandladders.players[player].name} has won!`);
+    }
+},
+
+
 calcMath: () =>{
     document.getElementById("playerTurn").textContent = `It's ${snakesandladders.players[snakesandladders.currentPlayer].name}'s turn!`;
     const questionType = Math.round(Math.random() * (4 - 1) + 1);

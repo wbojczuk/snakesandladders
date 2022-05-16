@@ -24,17 +24,21 @@ body{
 }
 
 .main--grid{
+    background-image: url('./img/background.png');
+    background-size: cover;
     display: grid;
-    width:50vw;
+    width:53vw;
     aspect-ratio: 1/1;
-    border: 1px solid black;
+    border: 1px solid #000;
     grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
 }
 
 .grid--item{
+    z-index: 10;
     border: 1px solid black;
     user-select: none;
     position: relative;
+    width: 5vw;
 }
 .grid--num{
     text-align: right;
@@ -55,18 +59,7 @@ body{
     
 }
 
-.character-disp{
-    left: 0;
-    top:0;
-    width:100%;
-    aspect-ratio: 1/1;
-    background-position: center;
-    background-size: 50%;
-    background-repeat: no-repeat;
-    position: relative;
-    cursor: pointer;
-    
-}
+
 
 #mainContent {
     display: none;
@@ -107,7 +100,7 @@ button{
     justify-content: center;
 }
 #settingTitle{
-    padding-bottom: 100px;
+    padding-bottom: 50px;
     text-align: center;
     font-size: 40px;
 }
@@ -118,4 +111,20 @@ button{
 }
 #nextSetting{
     margin-top: 50px;
+}
+.character-disp{
+    left: 0;
+    top:0;
+    width:100%;
+    aspect-ratio: 1/1;
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s background-color;
+}
+
+.character-disp:hover{
+    background-color:  rgb(18, 188, 235);
 }

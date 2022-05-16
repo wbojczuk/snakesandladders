@@ -210,13 +210,12 @@ movePlayer: (player)=>{
         
             if (moveCounter < amount){
             setTimeout(()=>{
-                
+                moveCounter++
                 if(snakesandladders.players[player].pos+moveCounter>100){
                     snakesandladders.players[player].pos = 82;
                 const playerChar = document.getElementById(snakesandladders.players[player].id);
                 document.querySelector(`.col82`).append(playerChar);
                 }else{
-                    moveCounter++
                 const playerChar = document.getElementById(snakesandladders.players[player].id);
                 document.querySelector(`.col${snakesandladders.players[player].pos + moveCounter}`).append(playerChar);
                 playerChar.style.transform = `translateX(-100%)`;

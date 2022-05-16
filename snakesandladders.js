@@ -7,19 +7,12 @@ let snakesandladders = {
     playerCount: 2,
 
     players: [
-        {
-            id:"player1",
-            character: "./img/char1.svg",
-            pos:0,
-            name:"William"
-        },
-        {
-            id:"player2",
-            character: "./img/char2.svg",
-            pos:0,
-            name:"sophie"
-        },
-        
+        // {
+        //     id:"player1",
+        //     character: "./img/char1.svg",
+        //     pos:0,
+        //     name:"William"
+        // },
        
     ],
 
@@ -36,13 +29,16 @@ let snakesandladders = {
 
     // START SETTINGS
     settingType:"playerCount",
-settings: ()=>{
+settings: (charID)=>{
     switch (snakesandladders.settingType){
         case "playerCount":
             setPlayerCount();
         break;
         case "playerName":
             setPlayerName();
+        break;
+        case "playerChar":
+            setPlayerChar();
         break;
     }
 
@@ -63,19 +59,37 @@ settings: ()=>{
 
     function setPlayerName(){
         snakesandladders.players[snakesandladders.currentPlayer].name = document.getElementById("playerNameInput").value;
+
+        snakesandladders.settingType = "playerChar";
+        document.getElementById("nextSetting").style.display = "none";
+    document.getElementById("settingTitle").textContent = `Set ${snakesandladders.players[snakesandladders.currentPlayer].name}'s Character`;
+    document.getElementById("settingOption").innerHTML = `<div onclick="snakesandladders.settings('char1');" class="character-disp" style="background-image:url('./img/char1.svg')"></div><div onclick="snakesandladders.settings('char2');" class="character-disp" style="background-image:url('./img/char2.svg')"></div>`;
     }
-    // CONTINUE HERE
-    // 
-    // 
-    // 
-    // 
-    // 
+    
+
+    function setPlayerChar(){
+        snakesandladders.players[snakesandladders.currentPlayer].character = snakesandladders.characters[charID].src;
+        if(snakesandladders.currentPlayer+1<snakesandladders.playerCount){
+            snakesandladders.currentPlayer+=1;
+            snakesandladders.settingType = "playerName";
+    document.getElementById("settingTitle").textContent = `Set player${snakesandladders.currentPlayer+1}'s  name`;
+    document.getElementById("settingOption").innerHTML = `<label for='playerNameInput'>Player Name&nbsp;</label><input value='player${snakesandladders.currentPlayer+1}' type='text' name='playerNameInput' id='playerNameInput'/>`;
+    document.getElementById("nextSetting").style.display = "block";
+            
+        } else{
+            snakesandladders.setup();
+        }
+    }
+    
 
 },
     // END SETTINGS
 
 // START SETUP
 setup: ()=>{
+    snakesandladders.currentPlayer = 0;
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
 const mainGrid = document.getElementById("mainGrid");
 const gridItem = document.createElement("div");
 gridItem.className = "grid--item";
@@ -166,6 +180,7 @@ character.className = "character";
 for(let i = 0; i<snakesandladders.players.length; i++){
     const tempChar = character.cloneNode(false);
     tempChar.style.backgroundImage = `url('${snakesandladders.players[i].character}')`;
+    tempChar.textContent = snakesandladders.players[i].name;
     tempChar.style.transform = `translateX(-${(i+1)*100}%)`;
     tempChar.setAttribute("value", `-${(i+1)*100}`);
     tempChar.setAttribute("id", snakesandladders.players[i].id)
@@ -283,6 +298,7 @@ testMath:(player)=>{
                 snakesandladders.currentPlayer = 0;
             }
             snakesandladders.movePlayer(player);
+            document.getElementById("mathInput").value = "";
             snakesandladders.calcMath(); 
         }else{
             if(snakesandladders.currentPlayer < snakesandladders.playerCount - 1){
@@ -290,6 +306,7 @@ testMath:(player)=>{
             } else{
                 snakesandladders.currentPlayer = 0;
             }
+            document.getElementById("mathInput").value = "";
             snakesandladders.calcMath();
         }
     }
@@ -301,4 +318,4 @@ currentPlayer: 0
 
 }
 
- snakesandladders.setup();
+// snakesandladders.setup();

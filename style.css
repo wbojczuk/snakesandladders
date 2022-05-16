@@ -3,6 +3,10 @@
     padding:0;
 }
 
+body{
+    overflow-y: hidden;
+}
+
 .center {
     display: flex;
     align-items: center;
@@ -38,18 +42,34 @@
 }
 
 .character{
+    text-align: center;
+    padding-top: 30%;
+    font-size:10px;
     top:0;
     width:100%;
     height: 100%;
-    background-position: center;
+    background-position: 50% 55%;
     background-size: 50%;
     background-repeat: no-repeat;
     position: absolute;
     
 }
 
+.character-disp{
+    left: 0;
+    top:0;
+    width:100%;
+    aspect-ratio: 1/1;
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    position: relative;
+    cursor: pointer;
+    
+}
+
 #mainContent {
-    display: block;
+    display: none;
 }
 
 #printQuestion{
@@ -74,7 +94,7 @@ button{
 }
 
 #settings{
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     width:100%;

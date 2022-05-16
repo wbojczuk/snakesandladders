@@ -91,6 +91,12 @@ settings: (charID)=>{
 
 // START SETUP
 setup: ()=>{
+document.getElementById("mathInput").addEventListener("keydown", (evt)=>{
+    if(evt.key == "Enter"){
+        snakesandladders.testMath(snakesandladders.currentPlayer);
+    }
+});
+
     snakesandladders.currentPlayer = 0;
     document.getElementById("settings").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
@@ -210,7 +216,7 @@ movePlayer: (player)=>{
         
             if (moveCounter < amount){
             setTimeout(()=>{
-                moveCounter++
+                moveCounter++;
                 if(snakesandladders.players[player].pos+moveCounter>100){
                     snakesandladders.players[player].pos = 82;
                 const playerChar = document.getElementById(snakesandladders.players[player].id);

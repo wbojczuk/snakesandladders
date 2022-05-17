@@ -10,27 +10,43 @@
 </head>
 <body>
     <div id="mainContent">
-        <div id="playerTurn"></div>
+        <div class="popup--wrapper" id="popupWrapper">
+        <div class="popup" id="popup">
+            <div id="playerTurn"></div>
+            <div id="printQuestion"></div>
+        <div class="center">
+        <input type="text" id="mathInput">
+    </div>
+    <div class="center">
+        <button id="mathSubmit" onclick="snakesandladders.testMath(snakesandladders.currentPlayer);">Submit</button>
+    </div>
+        
+    </div>
+</div>
+
     <div class="main--center">
         <div class="main--grid" id="mainGrid">
         </div>
     </div>
-    <div id="printQuestion"></div>
-<div class="center">
-    <input type="text" id="mathInput">
-    <button onclick="snakesandladders.testMath(snakesandladders.currentPlayer);">Submit</button>
     
-</div>
+    
+
 </div>
 <div id="settings">
-    <div style="width:100%;">
+    <div class="settings--wrapper">
         <div id="settingTitle">Select the amount of players</div>
     <div id="settingOption">
         <input value="2" type="range" id="playerCountInput" name="playerCountInput"
-         min="2" max="4">
-  <label for="playerCountInput">Player Count 2-4</label>
+         min="2" max="4"list="volsettings">
+         <datalist id="volsettings">
+             
+             <option>2</option>
+             <option>3</option>
+             <option>4</option>
+         </datalist>
+  <label for="playerCountInput">Player Count: <span id="playerCountDisp">2</span></label>
     </div>
-    <div class="center"><button id="nextSetting" onclick="snakesandladders.settings();">Next ></button></div>
+    <div class="center"><button id="nextSetting" onclick="snakesandladders.settings();">Next</button></div>
 </div>
     
     

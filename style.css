@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo&family=Sacramento&display=swap');
 *{
     margin:0;
     padding:0;
@@ -46,13 +47,14 @@ body{
 }
 
 .character{
+    font-family: 'Heebo', sans-serif;
     text-align: center;
     padding-top: 30%;
-    font-size:10px;
+    font-size:12px;
     top:0;
     width:100%;
     height: 100%;
-    background-position: 50% 55%;
+    background-position: 50% 65%;
     background-size: 50%;
     background-repeat: no-repeat;
     position: absolute;
@@ -65,26 +67,7 @@ body{
     display: none;
 }
 
-#printQuestion{
-    width:100%;
-    height:70px;
-    text-align: center;
-    font-size:50px;
-    user-select: none;
-}
 
-button{
-    cursor: pointer;
-    user-select: none;
-}
-
-#playerTurn{
-    height:50px;
-    width:100%;
-    text-align: center;
-    font-size: 40px;
-    user-select: none;
-}
 
 #settings{
     display: flex;
@@ -100,9 +83,12 @@ button{
     justify-content: center;
 }
 #settingTitle{
-    padding-bottom: 50px;
-    text-align: center;
+    margin-bottom: 50px;
+    text-align: left;
     font-size: 40px;
+    display: inline-block;
+    border-bottom: 2px solid #000;
+    font-family: 'Heebo', sans-serif;
 }
 #settingOption{
     display: flex;
@@ -110,7 +96,34 @@ button{
     justify-content: center;
 }
 #nextSetting{
-    margin-top: 50px;
+    position: relative;
+    margin: 20px 0;
+    padding:10px 30px;
+    background-color: rgb(148, 220, 240);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.5em;
+    transition: padding 0.5s, background-color 0.5s;
+    overflow: hidden;
+}
+#nextSetting:after{
+    content: ">";
+    font-size: 1.2em;
+    display: inline-block;
+    position: absolute;
+    left: 100%;
+    right:0;
+    top:5px;
+    font-size: 1.3em;
+    transition: transform 0.3s ease-in-out;
+}
+#nextSetting:hover:after{
+    transform: translateX(-40px);
+}
+#nextSetting:hover{
+    padding-right: 80px;
+    background-color: rgb(49, 163, 195);
 }
 .character-disp{
     left: 0;
@@ -125,6 +138,106 @@ button{
     transition: 0.5s background-color;
 }
 
+#playerCountInput{
+    width: 20%;
+    aspect-ratio: 1/0.5;
+}
+
 .character-disp:hover{
-    background-color:  rgb(18, 188, 235);
+    background-color:  rgb(16, 106, 131);
+}
+
+.settings--wrapper{
+    width:100%;
+    background-color: rgb(18, 188, 235);
+}
+
+#settingOption label{
+    margin-left: 20px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.4em;
+}
+
+#playerNameInput{
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.5em;
+}
+
+.popup--wrapper{
+    z-index: 20;
+    display: none;
+    height:100vh;
+    width:100vw;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup{
+    width: 50%;
+    aspect-ratio: 1/0.5;
+    background-color: rgba(18, 188, 235, 0.800);
+    border: 1px solid transparent;
+    border-radius: 15px;
+    transform: scale(0);
+    transition: transform 0.5s ease-in-out, background-color;
+}
+#printQuestion{
+    width:100%;
+    text-align: center;
+    font-size:50px;
+    user-select: none;
+    font-family: 'Heebo', sans-serif;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
+
+button{
+    cursor: pointer;
+    user-select: none;
+
+}
+
+#playerTurn{
+    padding-left: 20px;
+    height:50px;
+    width:100%;
+    text-align: left;
+    font-size: 1.8em;
+    user-select: none;
+    font-family: 'Heebo', sans-serif;
+}
+#mathInput{
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.5em;
+}
+#mathSubmit{
+    position: relative;
+    margin: 20px 0;
+    padding:10px 30px;
+    background-color: rgb(148, 220, 240);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.5em;
+    transition: padding 0.5s, background-color 0.5s;
+    overflow: hidden;
+}
+#mathSubmit:after{
+    content: ">";
+    font-size: 1.2em;
+    display: inline-block;
+    position: absolute;
+    left: 100%;
+    right:0;
+    top:5px;
+    font-size: 1.3em;
+    transition: transform 0.3s ease-in-out;
+}
+#mathSubmit:hover:after{
+    transform: translateX(-40px);
+}
+#mathSubmit:hover{
+    padding-right: 80px;
+    background-color: rgb(196, 242, 255);
 }

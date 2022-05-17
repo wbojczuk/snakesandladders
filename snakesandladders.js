@@ -28,12 +28,19 @@ let snakesandladders = {
         char3: {
             id:"char3",
             src: "./img/char3.png"
+        },
+        char4: {
+            id:"char4",
+            src: "./img/char4.png"
         }
     },
 
     // START SETTINGS
     settingType:"playerCount",
 settings: (charID)=>{
+
+    
+
     switch (snakesandladders.settingType){
         case "playerCount":
             setPlayerCount();
@@ -67,7 +74,7 @@ settings: (charID)=>{
         snakesandladders.settingType = "playerChar";
         document.getElementById("nextSetting").style.display = "none";
     document.getElementById("settingTitle").textContent = `Set ${snakesandladders.players[snakesandladders.currentPlayer].name}'s Character`;
-    document.getElementById("settingOption").innerHTML = `<div onclick="snakesandladders.settings('char3');" class="character-disp" style="background-image:url('./img/char3.png')"></div><div onclick="snakesandladders.settings('char1');" class="character-disp" style="background-image:url('./img/char1.svg')"></div><div onclick="snakesandladders.settings('char2');" class="character-disp" style="background-image:url('./img/char2.svg')"></div>`;
+    document.getElementById("settingOption").innerHTML = `<div onclick="snakesandladders.settings('char3');" class="character-disp" style="background-image:url('./img/char4.png')"></div><div onclick="snakesandladders.settings('char4');" class="character-disp" style="background-image:url('./img/char3.png')"></div><div onclick="snakesandladders.settings('char1');" class="character-disp" style="background-image:url('./img/char1.svg')"></div><div onclick="snakesandladders.settings('char2');" class="character-disp" style="background-image:url('./img/char2.svg')"></div>`;
     }
     
 
@@ -88,15 +95,17 @@ settings: (charID)=>{
 
 },
     // END SETTINGS
-
+preSetup: ()=>{
+    document.getElementById("playerCountInput").addEventListener("change", ()=>{
+        document.getElementById("playerCountDisp").textContent = document.getElementById("playerCountInput").value})
+},
 // START SETUP
 setup: ()=>{
-document.getElementById("mathInput").addEventListener("keydown", (evt)=>{
-    if(evt.key == "Enter"){
-        snakesandladders.testMath(snakesandladders.currentPlayer);
-    }
-});
-
+    document.getElementById("mathInput").addEventListener("keydown", (evt)=>{
+        if(evt.key == "Enter"){
+            snakesandladders.testMath(snakesandladders.currentPlayer);
+        }
+    });
     snakesandladders.currentPlayer = 0;
     document.getElementById("settings").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
@@ -200,7 +209,9 @@ for(let i = 0; i<snakesandladders.players.length; i++){
 // CALC FIRST QUESTION
 
 snakesandladders.calcMath();
-
+document.getElementById("mathInput").focus();
+document.getElementById("popupWrapper").style.display = "flex";
+setTimeout(()=>{document.getElementById("popup").style.transform = "scale(1)";}, 1000);
 // END SETUP
 },
 
@@ -262,6 +273,10 @@ testLadders: (player)=>{
         snakesandladders.players[player].pos = 100;
         const playerChar = document.getElementById(snakesandladders.players[player].id);
         document.querySelector(`.col100`).append(playerChar);
+    }else if(snakesandladders.players[player].pos == 37){
+        snakesandladders.players[player].pos = 57;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col57`).append(playerChar);
     }
 },
 
@@ -287,12 +302,21 @@ testSnakes: (player)=>{
         snakesandladders.players[player].pos = 8;
         const playerChar = document.getElementById(snakesandladders.players[player].id);
         document.querySelector(`.col8`).append(playerChar);
+    }else if(snakesandladders.players[player].pos == 82){
+        snakesandladders.players[player].pos = 63;
+        const playerChar = document.getElementById(snakesandladders.players[player].id);
+        document.querySelector(`.col63`).append(playerChar);
     }
 },
 
 testWin: (player)=>{
     if(snakesandladders.players[player].pos == 100){
         alert(`${snakesandladders.players[player].name} has won!`);
+    }else{
+        setTimeout(() => {
+            document.getElementById("popup").style.transform = "scale(1)";
+            document.getElementById("mathInput").focus();
+        }, 100);
     }
 },
 
@@ -367,27 +391,52 @@ calcMath: () =>{
     document.getElementById("printQuestion").textContent = `What is ${snakesandladders.mathQuestion}?`;
 },
 testMath:(player)=>{
+    
+    const popup = document.getElementById("popup");
     if(isNaN(parseFloat(document.getElementById("mathInput").value))){
         alert("enter a number");
     }else{
         const mathInput = parseFloat(document.getElementById("mathInput").value);
         if(mathInput == snakesandladders.mathAnswer){
-            if(snakesandladders.currentPlayer < snakesandladders.playerCount - 1){
-                snakesandladders.currentPlayer++
-            } else{
-                snakesandladders.currentPlayer = 0;
-            }
-            snakesandladders.movePlayer(player);
-            document.getElementById("mathInput").value = "";
-            snakesandladders.calcMath(); 
+            popup.style.backgroundColor = "rgb(12, 239, 76, 0.800)";
+            setTimeout(() => {
+                
+                popup.style.transform = "scale(0)";
+                setTimeout(()=>{
+                    popup.style.backgroundColor = "rgb(18, 188, 235, 0.800)";
+                    if(snakesandladders.currentPlayer < snakesandladders.playerCount - 1){
+                        snakesandladders.currentPlayer++
+                    } else{
+                        snakesandladders.currentPlayer = 0;
+                    }
+                    snakesandladders.movePlayer(player);
+                    document.getElementById("mathInput").value = "";
+                    snakesandladders.calcMath(); 
+                    
+                }, 500)
+            }, 200);
+            
         }else{
-            if(snakesandladders.currentPlayer < snakesandladders.playerCount - 1){
-                snakesandladders.currentPlayer++
-            } else{
-                snakesandladders.currentPlayer = 0;
-            }
-            document.getElementById("mathInput").value = "";
-            snakesandladders.calcMath();
+            popup.style.backgroundColor = "rgb(210, 29, 29, 0.800)";
+            setTimeout(() => {
+                
+                popup.style.transform = "scale(0)";
+                setTimeout(()=>{
+                    popup.style.backgroundColor = "rgb(18, 188, 235, 0.800)";
+                    if(snakesandladders.currentPlayer < snakesandladders.playerCount - 1){
+                        snakesandladders.currentPlayer++
+                    } else{
+                        snakesandladders.currentPlayer = 0;
+                    }
+                    document.getElementById("mathInput").value = "";
+                    snakesandladders.calcMath();
+                    setTimeout(()=>{
+                        popup.style.transform = "scale(1)";
+                        document.getElementById("mathInput").focus();
+                    },200)
+                }, 500)
+            }, 200);
+            
         }
     }
 },
@@ -398,4 +447,4 @@ currentPlayer: 0
 
 }
 
-// snakesandladders.setup();
+snakesandladders.preSetup();

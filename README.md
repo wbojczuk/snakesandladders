@@ -1,2 +1,4 @@
 # snakesandladders
-My girlfriend dared me to make this
+https://wbojczuk.github.io/snakesandladders
+
+Arithmetic game...
